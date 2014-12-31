@@ -2,6 +2,7 @@ package com.willem.gameworld;
 
 import com.willem.gameobjects.Car;
 import com.willem.gameobjects.Freeway;
+import com.willem.tHelpers.AssetLoader;
 
 import java.util.ArrayList;
 
@@ -14,11 +15,14 @@ public class GameWorld {
 
     private GameState currentState;
 
+    private int score;
+
     public enum GameState {
-        READY, RUNNING, GAMEOVER
+        READY, RUNNING, GAMEOVER, HIGHSCORE
     }
 
     public GameWorld(int gameHeight) {
+        score = 0;
         currentState = GameState.READY;
         freeway = new Freeway(gameHeight);
     }
@@ -30,9 +34,12 @@ public class GameWorld {
                 break;
 
             case RUNNING:
-            default:
                 updateRunning(delta);
                 break;
+
+            default:
+                break;
+
         }
     }
 
@@ -42,19 +49,34 @@ public class GameWorld {
 
     private void updateRunning(float delta) {
         if (freeway.collision()) {
+            AssetLoader.crash.play();
             freeway.stop();
             currentState = GameState.GAMEOVER;
+            if (score > AssetLoader.getHighScore()) {
+                AssetLoader.setHighScore(score);
+                currentState = GameState.HIGHSCORE;
+            }
         }
-        else
+        else {
             freeway.update(delta);
+            score = freeway.getScore();
+        }
     }
 
     public boolean isReady() {
         return currentState == GameState.READY;
     }
 
+    public boolean isRunning() {
+        return currentState == GameState.RUNNING;
+    }
+
     public boolean isGameOver() {
         return currentState == GameState.GAMEOVER;
+    }
+
+    public boolean isHighScore() {
+        return currentState == GameState.HIGHSCORE;
     }
 
     public void start() {
@@ -62,12 +84,16 @@ public class GameWorld {
     }
 
     public void restart() {
+        score = 0;
         currentState = GameState.READY;
         freeway.onRestart();
-        currentState = GameState.READY;
     }
 
     public ArrayList<Car> getCars() {
         return freeway.getCars();
+    }
+
+    public int getScore() {
+        return score;
     }
 }

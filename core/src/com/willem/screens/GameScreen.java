@@ -16,6 +16,7 @@ public class GameScreen implements Screen {
 
     private GameWorld world;
     private GameRenderer renderer;
+    private float runTime = 0;
 
     public GameScreen() {
         float screenWidth = Gdx.graphics.getWidth();
@@ -24,15 +25,14 @@ public class GameScreen implements Screen {
         float gameHeight = screenHeight / (screenWidth / gameWidth);
 
         world = new GameWorld((int) gameHeight);
-        renderer = new GameRenderer(world);
-
-        Gdx.input.setInputProcessor(new GestureDetector(new MyGestureListener(world, renderer.getCam())));
+        renderer = new GameRenderer(world, (int) gameHeight, (int) gameHeight / 2);
     }
 
     @Override
     public void render(float delta) {
+        runTime += delta;
         world.update(delta);
-        renderer.render();
+        renderer.render(runTime);
     }
 
     @Override

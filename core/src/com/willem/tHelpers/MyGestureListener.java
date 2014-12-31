@@ -60,13 +60,13 @@ public class MyGestureListener implements GestureDetector.GestureListener {
         if (activeCar != null && activeCar.getActive()) {
             if (velocityX > 0 &&
                 Math.abs(velocityX) > Math.abs(velocityY) &&
-                activeCar.getX() != 110) {
+                activeCar.getX() != 111) {
                 activeCar.changeLanes("right");
             }
 
             else if (velocityX < 0 &&
                      Math.abs(velocityX) > Math.abs(velocityY) &&
-                     activeCar.getX() != 8) {
+                     activeCar.getX() != 9) {
                 activeCar.changeLanes("left");
             }
 
@@ -75,11 +75,6 @@ public class MyGestureListener implements GestureDetector.GestureListener {
                      activeCar.getVelocityY() < -40) {
                 activeCar.setVelocityY(activeCar.getVelocityY() + 40);
             }
-
-//            else if (velocityY < 0 &&
-//                     Math.abs(velocityY) > Math.abs(velocityX)) {
-//                activeCar.setVelocityY(activeCar.getVelocityY() - 40);
-//            }
 
             activeCar.setActive(false);
             return true;

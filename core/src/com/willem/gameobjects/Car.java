@@ -3,6 +3,7 @@ package com.willem.gameobjects;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.willem.tHelpers.AssetLoader;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +20,7 @@ public class Car {
     private float rotation;
     private float start;
     private int width, height;
+    private int score;
     private Rectangle boundingBox;
 
     private boolean isChangingLanes;
@@ -26,30 +28,38 @@ public class Car {
 
     private Lane lane;
 
-    private List<Integer> LANES = Arrays.asList(8, 42, 76, 110);
+    private List<Integer> LANES = Arrays.asList(9, 43, 77, 111);
 
-    public Car(float y, int width, int height) {
+    private int color;
+    private float currentLane;
+
+    public Car(float y, int width, int height, int color) {
         start = y + 10;
+        score = 0;
         this.width = width;
         this.height = height;
+        this.color = color;
         position = new Vector2(0, start);
         velocity = new Vector2(0, 0);
         acceleration = new Vector2(0, 0);
         boundingBox = new Rectangle();
+        currentLane = 0;
     }
 
     public void update(float delta) {
         position.add(velocity.cpy().scl(delta));
         boundingBox.set(position.x, position.y, width, height);
-        if (isChangingLanes && LANES.contains((int) position.x)) {
+        if (isChangingLanes && closestLane() != -1 && LANES.get(closestLane()) != currentLane) {
             isChangingLanes = false;
             velocity.x = 0;
-            position.x = (int) position.x;
+            position.x = currentLane = LANES.get(closestLane());
         }
         if (position.y < -24) {
+            score++;
             position.y = start;
             lane.removeCar(this);
             velocity = new Vector2(0, 0);
+            color = new Random().nextInt(AssetLoader.textures.length);
         }
     }
 
@@ -114,6 +124,14 @@ public class Car {
         return boundingBox;
     }
 
+    public int getColor() {
+        return color;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
     public void setX(int x) {
         position.x = x;
     }
@@ -123,6 +141,8 @@ public class Car {
     }
 
     public void setLane(Lane lane) {
+        if (lane != null)
+            currentLane = lane.getPosition();
         this.lane = lane;
     }
 
@@ -140,8 +160,17 @@ public class Car {
     }
 
     public void onRestart() {
+        score = 0;
         position = new Vector2(0, start);
         velocity = new Vector2(0, 0);
         acceleration = new Vector2(0, 0);
+    }
+
+    private int closestLane() {
+        for (int i = 0; i < LANES.size(); i++) {
+            if (Math.abs(LANES.get(i) - position.x) < 2)
+                return i;
+        }
+        return -1;
     }
 }

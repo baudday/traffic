@@ -1,5 +1,7 @@
 package com.willem.gameobjects;
 
+import com.willem.tHelpers.AssetLoader;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -12,18 +14,26 @@ public class Freeway {
     private ArrayList<Car> cars;
     private ArrayList<Lane> lanes;
 
-    private int CAR_COUNT = 8;
+    private int CAR_COUNT = 7;
     private int LANE_COUNT = 4;
 
-    private int gameHeight;
+    private int gameHeight, score;
 
     public Freeway(int gameHeight) {
         this.gameHeight = gameHeight;
+        score = 0;
 
         cars = new ArrayList<Car>(CAR_COUNT);
-        lanes = new ArrayList(Arrays.asList(new Lane(8, gameHeight / 2), new Lane(42, gameHeight / 2), new Lane(76, gameHeight / 2), new Lane(110, gameHeight / 2)));
+        lanes = new ArrayList(Arrays.asList(
+                new Lane(9, gameHeight / 2),
+                new Lane(43, gameHeight / 2),
+                new Lane(77, gameHeight / 2),
+                new Lane(111, gameHeight / 2))
+        );
+
+
         for (int i = 0; i < CAR_COUNT; i++) {
-            cars.add(new Car(gameHeight - 5 , 17, 24));
+            cars.add(new Car(gameHeight - 5 , 15, 24, new Random().nextInt(AssetLoader.textures.length)));
         }
         for (int i = 0; i < cars.size(); i++) {
             if (i < LANE_COUNT) {
@@ -39,6 +49,7 @@ public class Freeway {
     }
 
     public void update(float delta) {
+        updateScore();
         checkLanes();
         updateLanes(delta);
         updateCars(delta);
@@ -62,6 +73,7 @@ public class Freeway {
     }
 
     public void onRestart() {
+        score = 0;
         for (int i = 0; i < lanes.size(); i++) {
             for (int j = 0; j < cars.size(); j++) {
                 lanes.get(i).removeCar(cars.get(j));
@@ -117,5 +129,16 @@ public class Freeway {
                 }
             }
         }
+    }
+
+    private void updateScore() {
+        score = 0;
+        for (int i = 0; i < cars.size(); i++) {
+            score += cars.get(i).getScore();
+        }
+    }
+
+    public int getScore() {
+        return score;
     }
 }
