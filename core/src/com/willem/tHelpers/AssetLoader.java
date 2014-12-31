@@ -32,7 +32,13 @@ public class AssetLoader {
     public static String suffix = ".png";
 
     public static void load() {
-        String[] carFiles = {"redcar", "yellowcar", "policecar", "greencar", "truck"};
+        String[] carFiles = {
+                "redcar", "yellowcar",
+                "policecar", "greencar",
+                "bluecar", "redtruck",
+                "yellowtruck", "greentruck",
+                "bluetruck"
+        };
         carTextures = new Texture[carFiles.length];
         textures = new TextureRegion[carTextures.length];
 
