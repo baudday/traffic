@@ -36,8 +36,9 @@ public class GameRenderer {
 
     int gameHeight, midPointY, scroll;
 
-    public GameRenderer(GameWorld world, int gameHeight, int midPointY) {
+    public GameRenderer(GameWorld world, int gameHeight, int midPointY, IActivityRequestHandler handler) {
         myWorld = world;
+
         this.gameHeight = gameHeight;
         this.midPointY = midPointY;
 
@@ -64,6 +65,7 @@ public class GameRenderer {
         Window.WindowStyle windowStyle = new Window.WindowStyle(AssetLoader.font, AssetLoader.uiSkin.getColor("white"), null);
         dialog = new ReplayDialog("Game Over", windowStyle);
         dialog.setWorld(myWorld);
+        dialog.setRequestHandler(handler);
 
         GestureDetector gameInputProcessor = new GestureDetector(new MyGestureListener(myWorld, cam));
         InputMultiplexer multiplexer = new InputMultiplexer();

@@ -16,6 +16,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 public class ReplayDialog extends Dialog {
 
     private GameWorld world;
+    private IActivityRequestHandler myRequestHandler;
 
     private Label highScore;
 
@@ -43,12 +44,17 @@ public class ReplayDialog extends Dialog {
         this.world = world;
     }
 
+    public void setRequestHandler(IActivityRequestHandler handler) {
+        myRequestHandler = handler;
+    }
+
     public void setHighScore(String val) {
         highScore.setText("Best: " + val);
     }
 
     @Override
     public Dialog show (Stage stage) {
+        myRequestHandler.showAds(true);
         show(stage, sequence(Actions.alpha(1), Actions.fadeIn(0.4f, Interpolation.fade)));
         setPosition(Math.round((stage.getWidth() - getWidth()) / 2), Math.round((stage.getHeight() - getHeight()) / 2));
         return this;
@@ -61,6 +67,7 @@ public class ReplayDialog extends Dialog {
 
     @Override
     protected void result(Object object) {
+        myRequestHandler.showAds(false);
         world.restart();
         super.result(object);
     }

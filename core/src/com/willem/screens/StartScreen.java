@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.willem.tHelpers.AssetLoader;
 import com.willem.tHelpers.BackgroundHelper;
+import com.willem.tHelpers.IActivityRequestHandler;
 
 /**
  * Created by wellis on 12/22/2014.
@@ -25,14 +26,16 @@ public class StartScreen implements Screen {
     private OrthographicCamera cam;
     private SpriteBatch batcher;
     private int scroll;
+    private IActivityRequestHandler myRequestHandler;
 
-    public StartScreen(Game g) {
+    public StartScreen(Game g, IActivityRequestHandler handler) {
         float screenWidth = Gdx.graphics.getWidth();
         float screenHeight = Gdx.graphics.getHeight();
         float gameWidth = 136;
         float gameHeight = screenHeight / (screenWidth / gameWidth);
 
         game = g;
+        myRequestHandler = handler;
         stage = new Stage();
         cam = new OrthographicCamera();
         cam.setToOrtho(true, 136, gameHeight);
@@ -55,11 +58,14 @@ public class StartScreen implements Screen {
         });
 
         stage.addActor(btnStart);
+
+        myRequestHandler.showAds(true);
     }
 
     public void btnStartClicked() {
         AssetLoader.beep.play();
-        game.setScreen(new GameScreen());
+        myRequestHandler.showAds(false);
+        game.setScreen(new GameScreen(myRequestHandler));
     }
 
     @Override
