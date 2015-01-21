@@ -20,7 +20,6 @@ public class Car {
     private float rotation;
     private float start;
     private int width, height;
-    private int score;
     private Rectangle boundingBox;
 
     private boolean isChangingLanes;
@@ -35,7 +34,6 @@ public class Car {
 
     public Car(float y, int width, int height, int color) {
         start = y + 10;
-        score = 0;
         this.width = width;
         this.height = height;
         this.color = color;
@@ -55,7 +53,6 @@ public class Car {
             position.x = currentLane = LANES.get(closestLane());
         }
         if (position.y < -24) {
-            score++;
             position.y = start;
             lane.removeCar(this);
             velocity = new Vector2(0, 0);
@@ -128,10 +125,6 @@ public class Car {
         return color;
     }
 
-    public int getScore() {
-        return score;
-    }
-
     public void setX(int x) {
         position.x = x;
     }
@@ -160,7 +153,6 @@ public class Car {
     }
 
     public void onRestart() {
-        score = 0;
         position = new Vector2(0, start);
         velocity = new Vector2(0, 0);
         acceleration = new Vector2(0, 0);

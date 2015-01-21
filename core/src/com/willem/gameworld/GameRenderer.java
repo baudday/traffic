@@ -83,7 +83,7 @@ public class GameRenderer {
 
         if (myWorld.isGameOver() || myWorld.isHighScore()) {
             if (myWorld.isHighScore())
-                dialog.setHighScore("" + myWorld.getScore());
+                dialog.setHighScore(AssetLoader.formatTime(myWorld.getScore()));
             dialog.show(stage);
         } else {
             scroll += 5;
@@ -96,7 +96,7 @@ public class GameRenderer {
             drawCar(cars.get(i));
         }
 
-        scoreLabel.setText("" + myWorld.getScore());
+        scoreLabel.setText(AssetLoader.formatTime(myWorld.getScore()));
 
         stage.act();
         stage.draw();

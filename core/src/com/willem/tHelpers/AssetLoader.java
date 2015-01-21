@@ -91,13 +91,19 @@ public class AssetLoader {
 
     }
 
-    public static void setHighScore(int val) {
-        prefs.putInteger("highScore", val);
+    public static void setHighScore(long val) {
+        prefs.putLong("highScore", val);
         prefs.flush();
     }
 
-    public static int getHighScore() {
-        return prefs.getInteger("highScore");
+    public static long getHighScore() {
+        return prefs.getLong("highScore");
+    }
+
+    public static String formatTime(long score) {
+        int minutes = (int) Math.floor(score / 60000);
+        int seconds = (int) Math.floor((score / 1000) % 60);
+        return String.format("%02d", minutes) + ":" + String.format("%02d", seconds);
     }
 
     public static void dispose() {

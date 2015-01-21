@@ -16,7 +16,7 @@ public class GameWorld {
 
     private GameState currentState;
 
-    private int score;
+    private long score;
 
     public enum GameState {
         READY, RUNNING, GAMEOVER, HIGHSCORE
@@ -63,7 +63,7 @@ public class GameWorld {
         }
         else {
             freeway.update(delta);
-            score = freeway.getScore();
+            score += delta*1000;
         }
     }
 
@@ -97,7 +97,7 @@ public class GameWorld {
         return freeway.getCars();
     }
 
-    public int getScore() {
+    public long getScore() {
         return score;
     }
 }

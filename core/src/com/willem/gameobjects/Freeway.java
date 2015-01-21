@@ -17,11 +17,10 @@ public class Freeway {
     private int CAR_COUNT = 7;
     private int LANE_COUNT = 4;
 
-    private int gameHeight, score;
+    private int gameHeight;
 
     public Freeway(int gameHeight) {
         this.gameHeight = gameHeight;
-        score = 0;
 
         cars = new ArrayList<Car>(CAR_COUNT);
         lanes = new ArrayList(Arrays.asList(
@@ -49,7 +48,6 @@ public class Freeway {
     }
 
     public void update(float delta) {
-        updateScore();
         checkLanes();
         updateLanes(delta);
         updateCars(delta);
@@ -73,7 +71,6 @@ public class Freeway {
     }
 
     public void onRestart() {
-        score = 0;
         for (int i = 0; i < lanes.size(); i++) {
             for (int j = 0; j < cars.size(); j++) {
                 lanes.get(i).removeCar(cars.get(j));
@@ -129,16 +126,5 @@ public class Freeway {
                 }
             }
         }
-    }
-
-    private void updateScore() {
-        score = 0;
-        for (int i = 0; i < cars.size(); i++) {
-            score += cars.get(i).getScore();
-        }
-    }
-
-    public int getScore() {
-        return score;
     }
 }
