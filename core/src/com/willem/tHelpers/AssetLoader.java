@@ -31,6 +31,8 @@ public class AssetLoader {
     public static String prefix = "data/";
     public static String suffix = ".png";
 
+    public static float btnWidth, btnHeight;
+
     public static void load() {
         String[] carFiles = {
                 "redcar", "yellowcar",
@@ -64,6 +66,8 @@ public class AssetLoader {
         uiSkin = new Skin(Gdx.files.internal(prefix + "ui/uiskin.json"));
 
         btnStyle = new TextButtonStyle(uiSkin.getDrawable("btn"), uiSkin.getDrawable("btn"), uiSkin.getDrawable("btn"), font);
+        btnWidth = Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() / 8);
+        btnHeight = btnWidth / 4;
         labelStyle = new LabelStyle(font, uiSkin.getColor("white"));
 
         crash = Gdx.audio.newSound(Gdx.files.internal(prefix + "sound/crash.mp3"));

@@ -1,5 +1,6 @@
 package com.willem.tHelpers;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
@@ -37,6 +38,7 @@ public class ReplayDialog extends Dialog {
         myRequestHandler = Traffic.handler;
         highScore = new Label("Best: " + AssetLoader.getHighScore(), AssetLoader.labelStyle);
         text(highScore).padTop(50);
+        getButtonTable().defaults().size(AssetLoader.btnWidth, AssetLoader.btnHeight);
         button("Play Again", "again", AssetLoader.btnStyle);
         getButtonTable().row();
         button("Leaderboard", "leaderboard", AssetLoader.btnStyle);

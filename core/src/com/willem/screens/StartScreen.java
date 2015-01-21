@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.willem.tHelpers.AssetLoader;
@@ -45,12 +46,12 @@ public class StartScreen implements Screen {
         scroll = 0;
         Gdx.input.setInputProcessor(stage);
 
-        Skin skin = AssetLoader.uiSkin;
-        float btnWidth = screenWidth - (screenWidth / 4);
-        float btnHeight = btnWidth / 4;
+        Table btnTable = new Table(AssetLoader.uiSkin);
+        btnTable.defaults().size(AssetLoader.btnWidth, AssetLoader.btnHeight);
+        btnTable.center();
+        btnTable.setFillParent(true);
+
         TextButton btnStart = new TextButton("Play", AssetLoader.btnStyle);
-        btnStart.setPosition((screenWidth / 2) - (btnWidth / 2), (screenHeight / 2) - (btnHeight / 2));
-        btnStart.setSize(btnWidth, btnHeight);
         btnStart.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int pointer, int button) {
@@ -59,8 +60,6 @@ public class StartScreen implements Screen {
         });
 
         TextButton btnLeaderboard = new TextButton("Leaderboard", AssetLoader.btnStyle);
-        btnLeaderboard.setPosition((screenWidth / 2) - (btnWidth / 2), (screenHeight / 2) - (btnHeight * 2));
-        btnLeaderboard.setSize(btnWidth, btnHeight);
         btnLeaderboard.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent e, float x, float y, int pointer, int button) {
@@ -69,8 +68,12 @@ public class StartScreen implements Screen {
             }
         });
 
-        stage.addActor(btnStart);
-        stage.addActor(btnLeaderboard);
+        btnTable.row();
+        btnTable.add(btnStart);
+        btnTable.row().padTop(10);
+        btnTable.add(btnLeaderboard);
+
+        stage.addActor(btnTable);
 
         myRequestHandler.showAds(true);
     }
