@@ -67,7 +67,7 @@ public class AssetLoader {
 
         btnStyle = new TextButtonStyle(uiSkin.getDrawable("btn"), uiSkin.getDrawable("btn"), uiSkin.getDrawable("btn"), font);
         btnWidth = Gdx.graphics.getWidth() - (Gdx.graphics.getWidth() / 8);
-        btnHeight = btnWidth / 4;
+        btnHeight = btnWidth / 5;
         labelStyle = new LabelStyle(font, uiSkin.getColor("white"));
 
         crash = Gdx.audio.newSound(Gdx.files.internal(prefix + "sound/crash.mp3"));

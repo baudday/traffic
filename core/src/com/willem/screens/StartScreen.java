@@ -47,7 +47,7 @@ public class StartScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         Table btnTable = new Table(AssetLoader.uiSkin);
-        btnTable.defaults().size(AssetLoader.btnWidth, AssetLoader.btnHeight);
+        btnTable.defaults().size(AssetLoader.btnWidth, AssetLoader.btnHeight).space(6);
         btnTable.center();
         btnTable.setFillParent(true);
 
@@ -70,7 +70,7 @@ public class StartScreen implements Screen {
 
         btnTable.row();
         btnTable.add(btnStart);
-        btnTable.row().padTop(10);
+        btnTable.row();
         btnTable.add(btnLeaderboard);
 
         stage.addActor(btnTable);
