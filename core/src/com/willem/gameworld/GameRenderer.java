@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.willem.gameobjects.Car;
 import com.willem.tHelpers.*;
+import com.willem.traffic.Traffic;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public class GameRenderer {
 
     int gameHeight, midPointY, scroll;
 
-    public GameRenderer(GameWorld world, int gameHeight, int midPointY, IActivityRequestHandler handler) {
+    public GameRenderer(GameWorld world, int gameHeight, int midPointY) {
         myWorld = world;
 
         this.gameHeight = gameHeight;
@@ -65,7 +66,6 @@ public class GameRenderer {
         Window.WindowStyle windowStyle = new Window.WindowStyle(AssetLoader.font, AssetLoader.uiSkin.getColor("white"), null);
         dialog = new ReplayDialog("Game Over", windowStyle);
         dialog.setWorld(myWorld);
-        dialog.setRequestHandler(handler);
 
         GestureDetector gameInputProcessor = new GestureDetector(new MyGestureListener(myWorld, cam));
         InputMultiplexer multiplexer = new InputMultiplexer();

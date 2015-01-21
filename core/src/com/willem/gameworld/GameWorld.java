@@ -3,6 +3,7 @@ package com.willem.gameworld;
 import com.willem.gameobjects.Car;
 import com.willem.gameobjects.Freeway;
 import com.willem.tHelpers.AssetLoader;
+import com.willem.traffic.Traffic;
 
 import java.util.ArrayList;
 
@@ -52,6 +53,9 @@ public class GameWorld {
             AssetLoader.crash.play();
             freeway.stop();
             currentState = GameState.GAMEOVER;
+            if (Traffic.handler.isSignedIn()) {
+                Traffic.handler.submitScore(score);
+            }
             if (score > AssetLoader.getHighScore()) {
                 AssetLoader.setHighScore(score);
                 currentState = GameState.HIGHSCORE;

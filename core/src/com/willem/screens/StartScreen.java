@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.willem.tHelpers.AssetLoader;
 import com.willem.tHelpers.BackgroundHelper;
 import com.willem.tHelpers.IActivityRequestHandler;
+import com.willem.traffic.Traffic;
 
 /**
  * Created by wellis on 12/22/2014.
@@ -28,14 +29,14 @@ public class StartScreen implements Screen {
     private int scroll;
     private IActivityRequestHandler myRequestHandler;
 
-    public StartScreen(Game g, IActivityRequestHandler handler) {
+    public StartScreen(Game g) {
         float screenWidth = Gdx.graphics.getWidth();
         float screenHeight = Gdx.graphics.getHeight();
         float gameWidth = 136;
         float gameHeight = screenHeight / (screenWidth / gameWidth);
 
         game = g;
-        myRequestHandler = handler;
+        myRequestHandler = Traffic.handler;
         stage = new Stage();
         cam = new OrthographicCamera();
         cam.setToOrtho(true, 136, gameHeight);
@@ -57,15 +58,30 @@ public class StartScreen implements Screen {
             }
         });
 
+        TextButton btnLeaderboard = new TextButton("Leaderboard", AssetLoader.btnStyle);
+        btnLeaderboard.setPosition((screenWidth / 2) - (btnWidth / 2), (screenHeight / 2) - (btnHeight * 2));
+        btnLeaderboard.setSize(btnWidth, btnHeight);
+        btnLeaderboard.addListener(new ClickListener() {
+            @Override
+            public void touchUp(InputEvent e, float x, float y, int pointer, int button) {
+                btnLeaderboardClicked();
+                super.touchUp(e, x, y, pointer, button);
+            }
+        });
+
         stage.addActor(btnStart);
+        stage.addActor(btnLeaderboard);
 
         myRequestHandler.showAds(true);
     }
 
     public void btnStartClicked() {
-        AssetLoader.beep.play();
         myRequestHandler.showAds(false);
-        game.setScreen(new GameScreen(myRequestHandler));
+        game.setScreen(new GameScreen());
+    }
+
+    public void btnLeaderboardClicked() {
+        myRequestHandler.showScores();
     }
 
     @Override

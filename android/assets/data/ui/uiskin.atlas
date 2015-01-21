@@ -1,12 +1,12 @@
 
 uiskin.png
-size: 32,32
+size: 1024,1024
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 btn
   rotate: false
-  xy: 2, 2
+  xy: 788, 728
   size: 12, 20
   split: 4, 4, 5, 5
   orig: 12, 20
@@ -14,10 +14,31 @@ btn
   index: -1
 btnActive
   rotate: false
-  xy: 16, 2
+  xy: 2, 2
   size: 12, 20
   split: 4, 4, 5, 5
   orig: 12, 20
+  offset: 0, 0
+  index: -1
+logo0
+  rotate: false
+  xy: 2, 508
+  size: 784, 240
+  orig: 784, 240
+  offset: 0, 0
+  index: -1
+logo1
+  rotate: false
+  xy: 2, 266
+  size: 784, 240
+  orig: 784, 240
+  offset: 0, 0
+  index: -1
+logo2
+  rotate: false
+  xy: 2, 24
+  size: 784, 240
+  orig: 784, 240
   offset: 0, 0
   index: -1
 

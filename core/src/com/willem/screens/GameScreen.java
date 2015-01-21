@@ -9,6 +9,7 @@ import com.willem.gameworld.GameWorld;
 import com.willem.tHelpers.IActivityRequestHandler;
 import com.willem.tHelpers.InputHandler;
 import com.willem.tHelpers.MyGestureListener;
+import com.willem.traffic.Traffic;
 
 /**
  * Created by wellis on 12/5/2014.
@@ -19,14 +20,14 @@ public class GameScreen implements Screen {
     private GameRenderer renderer;
     private float runTime = 0;
 
-    public GameScreen(IActivityRequestHandler handler) {
+    public GameScreen() {
         float screenWidth = Gdx.graphics.getWidth();
         float screenHeight = Gdx.graphics.getHeight();
         float gameWidth = 136;
         float gameHeight = screenHeight / (screenWidth / gameWidth);
 
         world = new GameWorld((int) gameHeight);
-        renderer = new GameRenderer(world, (int) gameHeight, (int) gameHeight / 2, handler);
+        renderer = new GameRenderer(world, (int) gameHeight, (int) gameHeight / 2);
     }
 
     @Override

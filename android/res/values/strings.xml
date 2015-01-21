@@ -2,6 +2,5 @@
 <resources>
 
     <string name="app_name">traffic</string>
-    <item type="id" name="ad_id">12345</item>
 
 </resources>

@@ -20,7 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 public class AssetLoader {
 
     public static Texture bg, bgEdge;
-    public static Texture[] carTextures;
+    public static Texture[] carTextures, logo;
     public static TextureRegion[] textures;
     public static BitmapFont font;
     public static Skin uiSkin;
@@ -50,11 +50,16 @@ public class AssetLoader {
         bgEdge.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         bgEdge.setWrap(Texture.TextureWrap.Repeat, Texture.TextureWrap.Repeat);
 
+        logo = new Texture[3];
+        for (int i = 0; i < logo.length; i++) {
+            logo[i] = new Texture(Gdx.files.internal(prefix + "ui/logo" + i + ".png"));
+            logo[i].setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+        }
+
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(prefix + "ui/font/slkscr.ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
         parameter.size = Math.round(38 * Gdx.graphics.getDensity());
         font = generator.generateFont(parameter);
-//        font = new BitmapFont(Gdx.files.internal(prefix + "ui/font/silkscreen.fnt"));
 
         uiSkin = new Skin(Gdx.files.internal(prefix + "ui/uiskin.json"));
 
@@ -63,7 +68,7 @@ public class AssetLoader {
 
         crash = Gdx.audio.newSound(Gdx.files.internal(prefix + "sound/crash.mp3"));
         woosh = Gdx.audio.newSound(Gdx.files.internal(prefix + "sound/woosh.mp3"));
-        beep = Gdx.audio.newSound(Gdx.files.internal(prefix + "sound/beep.mp3"));
+//        beep = Gdx.audio.newSound(Gdx.files.internal(prefix + "sound/beep.mp3"));
 
         prefs = Gdx.app.getPreferences("traffic");
         if (!prefs.contains("highScore")) {

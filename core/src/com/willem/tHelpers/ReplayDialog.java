@@ -7,6 +7,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.willem.gameworld.GameWorld;
+import com.willem.traffic.Traffic;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
@@ -33,19 +34,16 @@ public class ReplayDialog extends Dialog {
     }
 
     {
+        myRequestHandler = Traffic.handler;
         highScore = new Label("Best: " + AssetLoader.getHighScore(), AssetLoader.labelStyle);
         text(highScore).padTop(50);
         button("Play Again", "again", AssetLoader.btnStyle);
-//        getButtonTable().row();
-//        button("Leaderboard", "leaderboard");
+        getButtonTable().row();
+        button("Leaderboard", "leaderboard", AssetLoader.btnStyle);
     }
 
     public void setWorld(GameWorld world) {
         this.world = world;
-    }
-
-    public void setRequestHandler(IActivityRequestHandler handler) {
-        myRequestHandler = handler;
     }
 
     public void setHighScore(String val) {
@@ -67,8 +65,15 @@ public class ReplayDialog extends Dialog {
 
     @Override
     protected void result(Object object) {
-        myRequestHandler.showAds(false);
-        world.restart();
+        if (object == "again") {
+            myRequestHandler.showAds(false);
+            world.restart();
+        }
+
+        else if (object == "leaderboard") {
+            myRequestHandler.showScores();
+        }
+
         super.result(object);
     }
 }
