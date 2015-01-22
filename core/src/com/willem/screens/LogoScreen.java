@@ -52,7 +52,7 @@ public class LogoScreen implements Screen {
         batcher.begin();
         batcher.draw(AssetLoader.logo[frame], 3, (gameHeight / 2) - 19.5f, 130, 39);
         batcher.end();
-        if (runTime > 3) {
+        if (runTime > 5) {
             game.setScreen(new StartScreen(game));
         }
     }
