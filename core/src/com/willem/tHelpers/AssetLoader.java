@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -25,6 +26,7 @@ public class AssetLoader {
     public static BitmapFont font;
     public static Skin uiSkin;
     public static Sound crash, woosh, beep;
+    public static Image gameLogo;
     public static Preferences prefs;
     public static TextButtonStyle btnStyle;
     public static LabelStyle labelStyle;
@@ -58,6 +60,8 @@ public class AssetLoader {
             logo[i].setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         }
 
+        gameLogo = new Image(new Texture(Gdx.files.internal(prefix + "ui/game_logo.png")));
+
         FreeTypeFontGenerator generator = new FreeTypeFontGenerator(Gdx.files.internal(prefix + "ui/font/slkscr.ttf"));
         FreeTypeFontParameter parameter = new FreeTypeFontParameter();
         parameter.size = Math.round(38 * Gdx.graphics.getDensity());
@@ -71,8 +75,6 @@ public class AssetLoader {
         labelStyle = new LabelStyle(font, uiSkin.getColor("white"));
 
         crash = Gdx.audio.newSound(Gdx.files.internal(prefix + "sound/crash.mp3"));
-        woosh = Gdx.audio.newSound(Gdx.files.internal(prefix + "sound/woosh.mp3"));
-//        beep = Gdx.audio.newSound(Gdx.files.internal(prefix + "sound/beep.mp3"));
 
         prefs = Gdx.app.getPreferences("traffic");
         if (!prefs.contains("highScore")) {

@@ -46,10 +46,10 @@ public class StartScreen implements Screen {
         scroll = 0;
         Gdx.input.setInputProcessor(stage);
 
-        Table btnTable = new Table(AssetLoader.uiSkin);
-        btnTable.defaults().size(AssetLoader.btnWidth, AssetLoader.btnHeight).space(10 * Gdx.graphics.getDensity());
-        btnTable.center();
-        btnTable.setFillParent(true);
+        Table table = new Table(AssetLoader.uiSkin);
+        table.defaults().width(AssetLoader.btnWidth).space(10 * Gdx.graphics.getDensity());
+        table.center();
+        table.setFillParent(true);
 
         TextButton btnStart = new TextButton("Play", AssetLoader.btnStyle);
         btnStart.addListener(new ClickListener() {
@@ -68,12 +68,16 @@ public class StartScreen implements Screen {
             }
         });
 
-        btnTable.row();
-        btnTable.add(btnStart);
-        btnTable.row();
-        btnTable.add(btnLeaderboard);
+        float logoHeight = AssetLoader.gameLogo.getHeight() * (AssetLoader.btnWidth / AssetLoader.gameLogo.getWidth());
 
-        stage.addActor(btnTable);
+        table.row();
+        table.add(AssetLoader.gameLogo).height(logoHeight).space(100 * Gdx.graphics.getDensity());
+        table.row();
+        table.add(btnStart).height(AssetLoader.btnHeight);
+        table.row();
+        table.add(btnLeaderboard).height(AssetLoader.btnHeight);
+
+        stage.addActor(table);
 
         myRequestHandler.showAds(true);
     }

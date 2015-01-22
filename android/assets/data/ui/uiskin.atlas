@@ -6,7 +6,7 @@ filter: Nearest,Nearest
 repeat: none
 btn
   rotate: false
-  xy: 788, 728
+  xy: 788, 818
   size: 12, 20
   split: 4, 4, 5, 5
   orig: 12, 20
@@ -20,23 +20,30 @@ btnActive
   orig: 12, 20
   offset: 0, 0
   index: -1
+game_logo
+  rotate: false
+  xy: 2, 24
+  size: 664, 88
+  orig: 664, 88
+  offset: 0, 0
+  index: -1
 logo0
   rotate: false
-  xy: 2, 508
+  xy: 2, 598
   size: 784, 240
   orig: 784, 240
   offset: 0, 0
   index: -1
 logo1
   rotate: false
-  xy: 2, 266
+  xy: 2, 356
   size: 784, 240
   orig: 784, 240
   offset: 0, 0
   index: -1
 logo2
   rotate: false
-  xy: 2, 24
+  xy: 2, 114
   size: 784, 240
   orig: 784, 240
   offset: 0, 0
