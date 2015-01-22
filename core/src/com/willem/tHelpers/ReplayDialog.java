@@ -38,7 +38,7 @@ public class ReplayDialog extends Dialog {
         myRequestHandler = Traffic.handler;
         highScore = new Label("Best: " + AssetLoader.formatTime(AssetLoader.getHighScore()), AssetLoader.labelStyle);
         text(highScore).padTop(50);
-        getButtonTable().defaults().size(AssetLoader.btnWidth, AssetLoader.btnHeight);
+        getButtonTable().defaults().size(AssetLoader.btnWidth, AssetLoader.btnHeight).space(10 * Gdx.graphics.getDensity());
         button("Play Again", "again", AssetLoader.btnStyle);
         getButtonTable().row();
         button("Leaderboard", "leaderboard", AssetLoader.btnStyle);
