@@ -114,7 +114,13 @@ public class AssetLoader {
             carTextures[i].dispose();
         }
 
+        bg.dispose();
+        bgEdge.dispose();
+        for (int i = 0; i < logo.length; i++) {
+            logo[i].dispose();
+        }
         font.dispose();
+        uiSkin.dispose();
         crash.dispose();
     }
 
