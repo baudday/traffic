@@ -68,7 +68,7 @@ public class AndroidLauncher extends AndroidApplication implements IActivityRequ
 
 		// Create the GameHelper.
 		_gameHelper = new GameHelper(this, GameHelper.CLIENT_GAMES);
-		_gameHelper.enableDebugLog(true);
+		_gameHelper.enableDebugLog(false);
 
 		GameHelperListener gameHelperListener = new GameHelperListener() {
 			@Override
@@ -81,6 +81,7 @@ public class AndroidLauncher extends AndroidApplication implements IActivityRequ
 		};
 
 		_gameHelper.setup(gameHelperListener);
+		_gameHelper.setMaxAutoSignInAttempts(0);
 
 		AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
 
@@ -204,6 +205,7 @@ public class AndroidLauncher extends AndroidApplication implements IActivityRequ
 	@Override
 	public void onStart() {
 		super.onStart();
+		_gameHelper.onStart(this);
 	}
 
 	@Override
