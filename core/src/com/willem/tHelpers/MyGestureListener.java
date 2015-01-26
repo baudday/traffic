@@ -71,9 +71,11 @@ public class MyGestureListener implements GestureDetector.GestureListener {
             }
 
             else if (velocityY > 0 &&
-                     Math.abs(velocityY) > Math.abs(velocityX) &&
-                     activeCar.getVelocityY() < -40) {
-                activeCar.setVelocityY(activeCar.getVelocityY() + 40);
+                     Math.abs(velocityY) > Math.abs(velocityX)) {
+                if (activeCar.getVelocityY() > -80)
+                    activeCar.setVelocityY(-40);
+                else
+                    activeCar.setVelocityY(activeCar.getVelocityY() + 40);
             }
 
             activeCar.setActive(false);
