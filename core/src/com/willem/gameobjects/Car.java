@@ -28,9 +28,12 @@ public class Car {
     private Lane lane;
 
     private List<Integer> LANES = Arrays.asList(9, 43, 77, 111);
+    private int LANE_WIDTH = 34;
 
     private int color;
-    private float currentLane;
+    private float currentLane, leftLane, rightLane;
+
+    private String laneChangeDirection;
 
     public Car(float y, int width, int height, int color) {
         start = y + 10;
@@ -47,7 +50,7 @@ public class Car {
     public void update(float delta) {
         position.add(velocity.cpy().scl(delta));
         boundingBox.set(position.x, position.y, width, height);
-        if (isChangingLanes && closestLane() != -1 && LANES.get(closestLane()) != currentLane) {
+        if (isChangingLanes && !stillChangingLanes()) {
             isChangingLanes = false;
             velocity.x = 0;
             position.x = currentLane = LANES.get(closestLane());
@@ -61,12 +64,18 @@ public class Car {
     }
 
     public void changeLanes(String direction) {
+        isChangingLanes = true;
+        laneChangeDirection = direction;
         if (direction == "left") {
-            isChangingLanes = true;
+            leftLane = currentLane - LANE_WIDTH;
+            rightLane = currentLane;
+            currentLane = leftLane;
             velocity.x = -80;
         }
         if (direction == "right") {
-            isChangingLanes = true;
+            leftLane = currentLane;
+            rightLane = currentLane + LANE_WIDTH;
+            currentLane = rightLane;
             velocity.x = 80;
         }
     }
@@ -164,5 +173,17 @@ public class Car {
                 return i;
         }
         return -1;
+    }
+
+    private boolean stillChangingLanes() {
+        if (laneChangeDirection == "left") {
+            return !(Math.abs(leftLane - position.x) < 2);
+        }
+
+        else if (laneChangeDirection == "right") {
+            return !(Math.abs(rightLane - position.x) < 2);
+        }
+
+        return false;
     }
 }
