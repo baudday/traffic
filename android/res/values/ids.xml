@@ -4,5 +4,8 @@
     <item type="id" name="ad_id">12345</item>
     <string name="app_id">64809187724</string>
     <string name="leaderboard_id">CgkIjPO2t_EBEAIQAA</string>
+    <string name="bronze_achievement">CgkIjPO2t_EBEAIQBQ</string>
+    <string name="silver_achievement">CgkIjPO2t_EBEAIQAw</string>
+    <string name="gold_achievement">CgkIjPO2t_EBEAIQBA</string>
 
 </resources>

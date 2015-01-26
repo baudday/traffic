@@ -55,6 +55,7 @@ public class GameWorld {
             currentState = GameState.GAMEOVER;
             if (Traffic.handler.isSignedIn()) {
                 Traffic.handler.submitScore(score);
+                Traffic.handler.updateAchievements(score);
             }
             if (score > AssetLoader.getHighScore()) {
                 AssetLoader.setHighScore(score);

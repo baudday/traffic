@@ -173,6 +173,30 @@ public class AndroidLauncher extends AndroidApplication implements IActivityRequ
 		return _gameHelper.isSignedIn();
 	}
 
+	@Override
+	public void updateAchievements(long score) {
+		if (score < 30000) return;
+		else if (score >= 30000 && score < 60000) {
+			Games.Achievements.unlock(_gameHelper.getApiClient(), getString(R.string.bronze_achievement));
+		}
+		else if (score >= 60000 && score < 120000) {
+			Games.Achievements.unlock(_gameHelper.getApiClient(), getString(R.string.silver_achievement));
+		}
+		else if (score >= 120000) {
+			Games.Achievements.unlock(_gameHelper.getApiClient(), getString(R.string.gold_achievement));
+		}
+	}
+
+	@Override
+	public void showAchievements() {
+		if (isSignedIn())
+			startActivityForResult(Games.Achievements.getAchievementsIntent(_gameHelper.getApiClient()), REQUEST_CODE_UNUSED);
+		else
+		{
+			signIn();
+		}
+	}
+
 	private AdView createAdView() {
 		adView = new AdView(this);
 		adView.setAdSize(AdSize.SMART_BANNER);

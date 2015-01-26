@@ -42,6 +42,8 @@ public class ReplayDialog extends Dialog {
         button("Play Again", "again", AssetLoader.btnStyle);
         getButtonTable().row();
         button("Leaderboard", "leaderboard", AssetLoader.btnStyle);
+        getButtonTable().row();
+        button("Achievements", "achievements", AssetLoader.btnStyle);
     }
 
     public void setWorld(GameWorld world) {
@@ -74,6 +76,10 @@ public class ReplayDialog extends Dialog {
 
         else if (object == "leaderboard") {
             myRequestHandler.showScores();
+        }
+
+        else if (object == "achievements") {
+            myRequestHandler.showAchievements();
         }
 
         super.result(object);
